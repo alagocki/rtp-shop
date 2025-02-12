@@ -11,6 +11,7 @@
 .env.local
 .env.local.php
 .env.*.local
+.env.dev
 /public/fonts/*
 !/public/fonts/.gitkeep
 /public/img/*
@@ -48,3 +49,5 @@ files/asset-manifest.json
 ###> phpstan/phpstan ###
 phpstan.neon
 ###< phpstan/phpstan ###
+
+/data/*
