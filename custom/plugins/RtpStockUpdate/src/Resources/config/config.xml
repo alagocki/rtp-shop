@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/shopware/trunk/src/Core/System/SystemConfig/Schema/config.xsd">
+    <card>
+        <title>Stock Einstellungen</title>
+        <input-field type="text">
+            <name>stockThreshold</name>
+            <label>Lagerbestand Schwellenwert</label>
+            <copyable>true</copyable>
+            <helpText>Bestand unter diesem Wert wird als kritisch markiert.</helpText>
+            <defaultValue>10</defaultValue>
+        </input-field>
+        <input-field type="text">
+            <name>enableStockAlert</name>
+            <label>Lagerbestandswarnung aktivieren</label>
+            <copyable>true</copyable>
+            <helpText>Aktiviere eine Warnung, wenn der Bestand niedrig ist.</helpText>
+            <defaultValue>true</defaultValue>
+        </input-field>
+    </card>
+</config>

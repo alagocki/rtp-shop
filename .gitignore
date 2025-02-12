@@ -1,0 +1,50 @@
+.DS_Store
+/.idea
+/docker/mysql/data/*
+/vendor
+/docker-compose.override.yaml
+/node_modules
+/.symfony.local.yaml
+
+###> shopware/core ###
+.uniqueid.txt
+.env.local
+.env.local.php
+.env.*.local
+/public/fonts/*
+!/public/fonts/.gitkeep
+/public/img/*
+!/public/img/.gitkeep
+/public/css/*
+!/public/css/.gitkeep
+/public/js/*
+!/public/js/.gitkeep
+/public/media/*
+!/public/media/.gitkeep
+/public/theme/*
+!/public/theme/.gitkeep
+/public/thumbnail/*
+!/public/thumbnail/.gitkeep
+/public/assets/*
+/public/sitemap/*
+!/public/sitemap/.gitkeep
+/public/bundles/*
+!/public/bundles/.gitkeep
+/files/*
+/var/*
+!/var/log/.gitkeep
+!/var/cache/.gitkeep
+/auth.json
+/install.lock
+public/asset-manifest.json
+files/asset-manifest.json
+###< shopware/core ###
+
+###> friendsofphp/php-cs-fixer ###
+/.php-cs-fixer.php
+/.php-cs-fixer.cache
+###< friendsofphp/php-cs-fixer ###
+
+###> phpstan/phpstan ###
+phpstan.neon
+###< phpstan/phpstan ###

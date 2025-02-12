@@ -1,0 +1,27 @@
+{
+    "name": "rtp/rtp-stock-update",
+    "description": "rtp/rtp-stock-update",
+    "type": "shopware-platform-plugin",
+    "version": "1.0.0",
+    "license": "MIT",
+    "require": {
+        "shopware/core": "~6.6.0"
+    },
+    "extra": {
+        "shopware-plugin-class": "Rtp\\RtpStockUpdate",
+        "label": {
+            "de-DE": "RTP Stock Update",
+            "en-GB": "RTP Stock Update"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Rtp\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Rtp\\Tests\\": "tests/"
+        }
+    }
+}

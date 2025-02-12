@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <!-- Stock Update Service -->
+        <service id="Rtp\Services\StockUpdateService">
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+        </service>
+
+        <!-- Console Command -->
+        <service id="Rtp\Command\StockUpdateCommand">
+            <argument type="service" id="Rtp\Services\StockUpdateService"/>
+            <tag name="console.command"/>
+        </service>
+
+        <!-- Scheduled Task für regelmäßige Lagerbestands-Updates -->
+        <service id="Rtp\ScheduledTask\StockUpdateTask">
+            <tag name="shopware.scheduled.task"/>
+        </service>
+
+    </services>
+</container>
