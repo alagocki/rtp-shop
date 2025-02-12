@@ -51,3 +51,4 @@ phpstan.neon
 ###< phpstan/phpstan ###
 
 /data/*
+/docker/*
