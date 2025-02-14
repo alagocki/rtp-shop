@@ -1,0 +1,31 @@
+{
+    "name": "rtp/rtp-refinable-line-item",
+    "description": "Fügt eine Checkbox für veredelbare Artikel im Checkout hinzu",
+    "type": "shopware-platform-plugin",
+    "version": "1.0.0",
+    "license": "MIT",
+    "require": {
+        "shopware/core": "~6.6.0"
+    }
+    ,
+    "require-dev": {
+        "roave/security-advisories": "dev-latest"
+    },
+    "extra": {
+        "shopware-plugin-class": "RtpRefinableLineItem\\RtpRefinableLineItem",
+        "label": {
+            "de-DE": "Artikel veredelbar",
+            "en-GB": "Article refinable"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "RtpRefinableLineItem\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "RtpRefinableLineItem\\Tests\\": "tests/"
+        }
+    }
+}

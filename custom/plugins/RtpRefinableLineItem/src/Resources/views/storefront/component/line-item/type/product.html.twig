@@ -1,0 +1,19 @@
+{% sw_extends '@Storefront/storefront/component/line-item/type/product.html.twig' %}
+
+{% block component_line_item_type_product_details %}
+    {{ parent() }}
+    {% if showRemoveButton %}
+        <div class="line-item-details">
+            <div class="line-item-details-container">
+                <div class="product-wishlist">
+                    <label class="refinement-check">
+{#                        <input type="checkbox" name="rtp_customizable[{{ lineItem.id }}]" value="1" {% if lineItem.payload.customizable %}checked{% endif %}>#}
+                        <input form="confirmOrderForm" data-partial-delivery-checkbox-handler type="checkbox" class="form-check-input" name="rtp_customizable[{{ lineItem.id }}]" value="1" id="rtp_customizable" {% if lineItem.payload.customizable %}checked{% endif %}>
+{#                        <input type="text" name="rtp_customizable[{{ lineItem.id }}]" value="1" style="display: none;">#}
+                        Artikel veredeln
+                    </label>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
