@@ -26,7 +26,7 @@ class RtpRefinableLineItem extends Plugin
 
         $customFieldSetRepository->create([
             [
-                'name' => 'customizable_fields',
+                'name' => 'custom_rtp_customizable_fields',
                 'config' => [
                     'label' => [
                         'en-GB' => 'English custom field set label',
@@ -36,7 +36,7 @@ class RtpRefinableLineItem extends Plugin
                 ],
                 'customFields' => [
                     [
-                        'name' => 'customizable',
+                        'name' => 'custom_rtp_customizable',
                         'type' => CustomFieldTypes::BOOL,
                         'config' => [
                             'label' => [

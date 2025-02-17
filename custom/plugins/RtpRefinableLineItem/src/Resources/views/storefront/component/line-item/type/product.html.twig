@@ -8,8 +8,16 @@
                 <div class="product-wishlist">
                     <label class="refinement-check">
 {#                        <input type="checkbox" name="rtp_customizable[{{ lineItem.id }}]" value="1" {% if lineItem.payload.customizable %}checked{% endif %}>#}
-                        <input form="confirmOrderForm" data-partial-delivery-checkbox-handler type="checkbox" class="form-check-input" name="rtp_customizable[{{ lineItem.id }}]" value="1" id="rtp_customizable" {% if lineItem.payload.customizable %}checked{% endif %}>
+{#                        <input form="confirmOrderForm" data-partial-delivery-checkbox-handler type="checkbox" class="form-check-input" name="rtp_customizable[{{ lineItem.id }}]" value="1" id="rtp_customizable" {% if lineItem.payload.customizable %}checked{% endif %}>#}
 {#                        <input type="text" name="rtp_customizable[{{ lineItem.id }}]" value="1" style="display: none;">#}
+                        <input form="confirmOrderForm"
+                               type="checkbox"
+                               name="rtp_customizable[{{ lineItem.id }}]"
+                               id="customizable-{{ lineItem.id }}"
+                               class="customizable-checkbox"
+                               data-customizable-cart="{{ lineItem.id }}"
+                               {% if lineItem.payload.rtp_customizable %}checked{% endif %}
+                        >
                         Artikel veredeln
                     </label>
                 </div>
