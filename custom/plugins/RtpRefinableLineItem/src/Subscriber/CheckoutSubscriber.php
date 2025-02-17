@@ -46,7 +46,7 @@ class CheckoutSubscriber implements EventSubscriberInterface
                             [
                                 'id' => $lineItemId,
                                 'customFields' => [
-                                    'customizable' => (bool)$customizable[$payload['productId']]
+                                    'custom_rtp_customizable' => (bool)$customizable[$payload['productId']]
                                 ]
                             ]
                         ], $context);
