@@ -1,0 +1,10 @@
+
+<div>hallo Welt</div>
+<div v-if="filteredItems.length">
+    <h3>Veredelbare Artikel</h3>
+    <ul>
+        <li v-for="item in filteredItems" :key="item.id">
+            {{ item.label }} (Artikel-Nr.: {{ item.productNumber }})
+        </li>
+    </ul>
+</div>
