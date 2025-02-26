@@ -1,19 +1,16 @@
-import './component/sw-order-custom-items';
+import template from './sw-order-custom-items.html.twig';
 
-Shopware.Module.register('sw-order-detail-extension', {
-    override: {
-        'sw-order-detail-base': {
-            template: `
-                <div>
-                    <sw-order-detail-base></sw-order-detail-base>
-                    <sw-order-custom-items :orderLineItems="orderLineItems"/>
-                </div>
-            `,
-            computed: {
-                orderLineItems() {
-                    return this.order ? this.order.lineItems : [];
-                }
-            }
+Shopware.Component.register('sw-order-custom-items', {
+    template,
+    props: {
+        orderLineItems: {
+            type: Array,
+            required: true
+        }
+    },
+    computed: {
+        filteredItems() {
+            return this.orderLineItems.filter(item => item.customFields && item.customFields.custom_rtp_customizable_order);
         }
     }
 });

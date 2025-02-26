@@ -1,13 +1,12 @@
 {% sw_extends '@Storefront/storefront/layout/footer/footer.html.twig' %}
-{% block layout_footer_inner_container %}
+{% block layout_footer_copyright %}
+    <div class="footer-copyright">
+        &copy; {{ "now"|date("Y") }} {{ "rtp.company.name"|trans }}
+    </div>
+{% endblock %}
 
-    {% block layout_footer_bottom %}
-        <div class="footer-bottom">
-            {% block layout_footer_copyright %}
-                <div class="footer-copyright">
-                    &copy; {{ "now"|date("Y") }} {{ "rtp.company.name"|trans }}
-                </div>
-            {% endblock %}
-        </div>
-    {% endblock %}
+{% block layout_footer_service_menu %}
+
+        &nbsp;
+
 {% endblock %}

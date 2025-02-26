@@ -9,23 +9,28 @@ use Shopware\Core\Framework\DataAbstractionLayer\Event\EntityWrittenEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Shopware\Core\Framework\Context;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
 
 class CheckoutSubscriber implements EventSubscriberInterface
 {
     private EntityRepository $orderLineItemRepository;
-
+    private EntityRepository $orderRepository;
     private RequestStack $requestStack;
+    private Context $context;
 
-    public function __construct(RequestStack $requestStack, EntityRepository $orderLineItemRepository)
+    public function __construct(RequestStack $requestStack, EntityRepository $orderLineItemRepository, EntityRepository $orderRepository)
     {
         $this->orderLineItemRepository = $orderLineItemRepository;
+        $this->orderRepository = $orderRepository;
         $this->requestStack = $requestStack;
+        $this->context = Context::createDefaultContext();
     }
 
     public static function getSubscribedEvents(): array
     {
         return [
-            OrderEvents::ORDER_LINE_ITEM_WRITTEN_EVENT => 'onOrderItemWritten'
+            OrderEvents::ORDER_LINE_ITEM_WRITTEN_EVENT => 'onOrderItemWritten',
+            OrderEvents::ORDER_WRITTEN_EVENT => 'onOrderWritten',
         ];
     }
 
@@ -33,7 +38,7 @@ class CheckoutSubscriber implements EventSubscriberInterface
     {
 
         try {
-            $context = Context::createDefaultContext();
+//            $context = Context::createDefaultContext();
             $customizable = $this->requestStack->getCurrentRequest()->get('rtp_customizable');
             if (null !== $customizable) {
                 foreach ($event->getWriteResults() as $writeResult) {
@@ -49,7 +54,7 @@ class CheckoutSubscriber implements EventSubscriberInterface
                                     'custom_rtp_customizable' => (bool)$customizable[$payload['productId']]
                                 ]
                             ]
-                        ], $context);
+                        ], $this->context);
                     }
                 }
             }
@@ -58,6 +63,64 @@ class CheckoutSubscriber implements EventSubscriberInterface
         } catch (\Throwable $e) {
             throw new \RuntimeException($e->getMessage());
         }
+
+    }
+
+    public function onOrderWritten(EntityWrittenEvent $event): void
+    {
+
+        foreach ($event->getWriteResults() as $writeResult) {
+
+            $orderId = $writeResult->getPrimaryKey();
+            if (!$orderId) {
+                continue;
+            }
+
+            $criteria = new Criteria([$orderId]);
+            $criteria->addAssociation('lineItems'); // Bestellpositionen laden
+
+            $order = $this->orderRepository->search($criteria, $event->getContext())->first();
+
+            if (!$order) {
+                continue;
+            }
+
+
+            $customizableItems = '';
+
+            foreach ($order->getLineItems() as $lineItem) {
+
+                if ($lineItem->getPayload() && !empty($lineItem->getPayload()['rtp_customizable'])) {
+
+                    if (true === $lineItem->getPayload()['rtp_customizable']) {
+                        $customizableItems .= $lineItem->getLabel() . ' - (' . $lineItem->getPayload()['productNumber'] . ') - ' . $lineItem->getQuantity() . 'x || ';
+                    }
+                }
+            }
+
+
+            if ($order->getCustomFields() && isset($order->getCustomFields()['custom_rtp_customizable_order']) && $order->getCustomFields()['custom_rtp_customizable_order'] === $customizableItems) {
+                continue;
+            }
+
+            if (!empty($customizableItems)) {
+
+                $criteria = new Criteria([$orderId]);
+                $this->orderRepository->search($criteria, $this->context);
+
+                $this->orderRepository->update([
+                    [
+                        'id' => $orderId,
+                        'customFields' => [
+                            'custom_rtp_customizable_order' => $customizableItems
+                        ]
+                    ]
+                ], $this->context);
+
+            }
+        }
+
+
 
     }
 }

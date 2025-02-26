@@ -8,6 +8,8 @@
       <sourceFolder url="file://$MODULE_DIR$/custom/plugins/SwagPayPal/src" isTestSource="false" packagePrefix="Swag\PayPal\" />
       <sourceFolder url="file://$MODULE_DIR$/custom/plugins/SwagPayPal/tests" isTestSource="true" packagePrefix="Swag\PayPal\Test\" />
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" packagePrefix="App\" />
+      <sourceFolder url="file://$MODULE_DIR$/custom/plugins/RtpLshopStock/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/custom/plugins/RtpStockUpdate/tests" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/async-aws/core" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/brick/math" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/cocur/slugify" />
@@ -142,6 +144,8 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/webmozart/assert" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/zircote/swagger-php" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/php-http/discovery" />
+      <excludeFolder url="file://$MODULE_DIR$/public/bundles" />
+      <excludeFolder url="file://$MODULE_DIR$/var" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
