@@ -30,7 +30,7 @@ class RtpRefinableLineItem extends Plugin
                 'config' => [
                     'label' => [
                         'en-GB' => 'English custom field set label',
-                        'de-DE' => 'German custom field set label',
+                        'de-DE' => 'Veredelbare Positionen',
                         Defaults::LANGUAGE_SYSTEM => "Mention the fallback label here"
                     ]
                 ],
@@ -41,7 +41,34 @@ class RtpRefinableLineItem extends Plugin
                         'config' => [
                             'label' => [
                                 'en-GB' => 'English custom field label',
-                                'de-DE' => 'German custom field label',
+                                'de-DE' => 'Artikel',
+                                Defaults::LANGUAGE_SYSTEM => "Mention the fallback label here"
+                            ],
+                            'customFieldPosition' => 1
+                        ]
+                    ]
+                ]
+            ]
+        ], $installContext->getContext());
+
+        $customFieldSetRepository->create([
+            [
+                'name' => 'custom_rtp_customizable_order',
+                'config' => [
+                    'label' => [
+                        'en-GB' => 'English custom field set label',
+                        'de-DE' => 'Veredelbare Positionen Bestellung',
+                        Defaults::LANGUAGE_SYSTEM => "Mention the fallback label here"
+                    ]
+                ],
+                'customFields' => [
+                    [
+                        'name' => 'custom_rtp_customizable_order',
+                        'type' => CustomFieldTypes::TEXT,
+                        'config' => [
+                            'label' => [
+                                'en-GB' => 'English custom field label',
+                                'de-DE' => 'Artikel',
                                 Defaults::LANGUAGE_SYSTEM => "Mention the fallback label here"
                             ],
                             'customFieldPosition' => 1
@@ -51,6 +78,7 @@ class RtpRefinableLineItem extends Plugin
             ]
         ], $installContext->getContext());
     }
+
 
     public function uninstall(UninstallContext $uninstallContext): void
     {
