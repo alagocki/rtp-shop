@@ -52,3 +52,5 @@ phpstan.neon
 
 /data/*
 /docker/*
+compose.yaml
+compose.override.yaml

@@ -4,9 +4,6 @@
     {{ parent() }}
 
     <label class="refinement-check">
-        {#                        <input type="checkbox" name="rtp_customizable[{{ lineItem.id }}]" value="1" {% if lineItem.payload.customizable %}checked{% endif %}>#}
-        {#                        <input form="confirmOrderForm" data-partial-delivery-checkbox-handler type="checkbox" class="form-check-input" name="rtp_customizable[{{ lineItem.id }}]" value="1" id="rtp_customizable" {% if lineItem.payload.customizable %}checked{% endif %}>#}
-        {#                        <input type="text" name="rtp_customizable[{{ lineItem.id }}]" value="1" style="display: none;">#}
         <input form="confirmOrderForm"
                type="checkbox"
                name="rtp_customizable[{{ lineItem.id }}]"
@@ -16,7 +13,7 @@
                {% if lineItem.payload.rtp_customizable %}checked{% endif %}
                 {% if showRemoveButton is empty %}disabled{% endif %}
         >
-        Artikel veredeln
+        Artikel veredeln <a href="/Informationen/HowTo-Refinement/"> &#9432; </a>
     </label>
 
 {% endblock %}
