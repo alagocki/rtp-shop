@@ -5,6 +5,9 @@ namespace Rtp\Services;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
 use RuntimeException;
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class StockUpdateService
 {
@@ -14,6 +17,31 @@ class StockUpdateService
     public function __construct(Connection $connection)
     {
         $this->connection = $connection;
+    }
+
+    public function updateStockExecute(OutputInterface $output): int
+    {
+        try {
+            $lShopStockData = $this->fetchCsvFromFtp(
+                $_ENV['LSHOP_SERVER'],
+                $_ENV['LSHOP_STOCK_USER'],
+                $_ENV['LSHOP_STOCK_PASSWORD'],
+                'stockfile.csv'
+            );
+
+            if (!empty($lShopStockData)) {
+                $this->setStockToZero();
+                if ($this->updateStockData($lShopStockData) === 0) {
+                    throw new RuntimeException('No products updated.');
+                }
+            }
+
+            return Command::SUCCESS;
+
+        } catch (RuntimeException $e) {
+            $output->writeln('<error>' . $e->getMessage() . '</error>');
+            return Command::FAILURE;
+        }
     }
 
     public function setStockToZero(): void

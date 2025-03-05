@@ -26,21 +26,12 @@ class StockUpdateCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         try {
-            $lShopStockData = $this->stockUpdateService->fetchCsvFromFtp(
-                $_ENV['LSHOP_SERVER'],
-                $_ENV['LSHOP_STOCK_USER'],
-                $_ENV['LSHOP_STOCK_PASSWORD'],
-                'stockfile.csv'
-            );
 
-            if (!empty($lShopStockData)) {
-                $this->stockUpdateService->setStockToZero();
-                if ($this->stockUpdateService->updateStockData($lShopStockData) === 0) {
-                    throw new RuntimeException('No products updated.');
-                }
+            if ($this->stockUpdateService->updateStockExecute($output) > 0) {
+                throw new RuntimeException('Update failed.');
             }
 
-            $output->writeln('<info>Stock update completed successfully.</info>');
+            $output->writeln('<info>Stock update at ' . date('d.m.Y h:i:s') . ' completed successfully.</info>');
             return Command::SUCCESS;
 
         } catch (RuntimeException $e) {
