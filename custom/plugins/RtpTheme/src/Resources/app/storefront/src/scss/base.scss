@@ -66,3 +66,15 @@ body {
     margin: 40px 0;
     box-shadow: 10px 5px 5px #777777;
 }
+
+.category-navigation {
+    display: block; // Standardanzeige
+
+    @media (max-width: 768px) { // Geräte mit max. 768px Breite (z. B. Handys)
+        display: none;
+    }
+}
+
+.product-detail-configurator-option-label {
+    opacity: 1;
+}
