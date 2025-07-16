@@ -54,3 +54,5 @@ phpstan.neon
 /docker/*
 compose.yaml
 compose.override.yaml
+
+.env

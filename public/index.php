@@ -9,6 +9,27 @@ $_SERVER['SCRIPT_FILENAME'] = __FILE__;
 
 require_once __DIR__ . '/../vendor/autoload_runtime.php';
 
+$filename = (new \DateTime())->format('Y-m-').'visits.csv';
+$fileheader = false;
+if (!file_exists($filename)) {
+    $fileheader = true;
+}
+$fh = fopen($filename, 'a');
+$line = [
+    'date' => (new \DateTime())->format('Y-m-d H:i:s'),
+    'host' => $_SERVER['HTTP_HOST'] ?? '-',
+    'remote_addr' => $_SERVER['REMOTE_ADDR'] ?? '-',
+    'remote_host' => $_SERVER['REMOTE_HOST'] ?? '-',
+    'browser' => $_SERVER['HTTP_USER_AGENT'] ?? '-',
+    'path' => $_SERVER['QUERY_STRING'] ?? '-',
+];
+if ($fileheader) {
+    $heads = array_keys($line);
+    fputcsv($fh, $heads, ',', '"', "\\");
+}
+fputcsv($fh, $line, ',', '"', "\\");
+fclose($fh);
+
 if (!file_exists(__DIR__ . '/../.env') && !file_exists(__DIR__ . '/../.env.dist') && !file_exists(__DIR__ . '/../.env.local.php')) {
     $_SERVER['APP_RUNTIME_OPTIONS']['disable_dotenv'] = true;
 }
